@@ -20,13 +20,13 @@ jobs:
     - name: Save PR data
       env:
         PR: ${{ github.event.number }}
-      run: echo "$PR $(git rev-parse --verify HEAD)" > build/pr-data.txt
+      run: echo "$PR $(git rev-parse --verify HEAD)" > out/pr-data.txt
     - uses: actions/upload-artifact@v4
       id: upload
       if: ${{ !github.event.repository.fork }}
       with:
         name: ${{ env.ARTIFACT_NAME }}
-        path: build/
+        path: out/
     - name: Echo artifact ID
       run: echo 'Artifact ID is ${{ steps.upload.outputs.artifact-id }}'
     - name: Verify artifact discoverability
